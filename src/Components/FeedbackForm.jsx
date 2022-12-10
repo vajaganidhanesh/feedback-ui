@@ -4,12 +4,14 @@ import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 
 function FeedbackForm({handleAdd}) {
+    
   const [text, setText] = useState("");
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState("");   
   const [rating, setRating] = useState(10)
 
   function handleTextChange(value) {
+
     if (text === "") {
       setBtnDisabled(true);
       setMessage(null);
@@ -20,9 +22,11 @@ function FeedbackForm({handleAdd}) {
       setMessage(null);
       setBtnDisabled(false);
     }
-    console.log(value);
     setText(value);
+
   }
+
+
   const handleSubmit = (e)=>{
     e.preventDefault();
     const newFeedback = {
@@ -31,6 +35,7 @@ function FeedbackForm({handleAdd}) {
     }
     handleAdd(newFeedback);
     setText('')
+    setBtnDisabled(false)
   }
 
   return (
