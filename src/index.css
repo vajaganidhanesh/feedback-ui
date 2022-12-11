@@ -6,6 +6,12 @@
   padding: 0;
 }
 
+.active{
+  text-decoration: none;
+  color:#ff6a95;
+  padding: 10px;
+}
+
 body {
   font-family: 'Poppins', sans-serif;
   background-color: #202142;

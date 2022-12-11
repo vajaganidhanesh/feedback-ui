@@ -1,10 +1,15 @@
 import {v4 as uuidv4} from 'uuid'
+import {BrowserRouter as Router,Routes,Route,NavLink} from'react-router-dom'
 import React, { useState } from "react";
 import Header from "./Components/Header";
 import FeedbackData from "./data/FeedbackData";
 import FeedbackList from "./Components/FeedbackList";
 import FeedbackStats from "./Components/FeedbackStats";
 import FeedbackForm from "./Components/FeedbackForm";
+import About from './Components/About';
+import AboutIconList from './Components/AboutIconList';
+import Card from './Components/shared/Card';
+import Posts from './Components/Posts';
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -22,14 +27,32 @@ function App() {
   };
 
   return (
-    <>
+    <Router>
       <Header />
       <div className="container">
-        <FeedbackForm handleAdd={addFeedback}/>
-        <FeedbackStats feedback={feedback}/>
-        <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+        <Routes>
+          <Route path='/' element={<>
+            <FeedbackForm handleAdd={addFeedback}/>
+            <FeedbackStats feedback={feedback}/>
+            <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
+          </>}/>
+          <Route path='/about' element={<About/>} ></Route>
+          <Route path='/post/:id/:name' element={<Posts/>}/>
+        </Routes>
+        <Card>
+        <NavLink to='/' activeClassName='active'>
+            Home
+        </NavLink>
+        <NavLink to='/about' activeClassName='active'>
+            About
+        </NavLink>
+      </Card>
       </div>
-    </>
+
+      
+
+      <AboutIconList />
+    </Router>
   );
 }
 
