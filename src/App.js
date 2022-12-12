@@ -1,11 +1,11 @@
-import {BrowserRouter as Router,Routes,Route,NavLink} from'react-router-dom'
+import {BrowserRouter as Router,Routes,Route} from'react-router-dom'
 import Header from "./Components/Header";
 import FeedbackList from "./Components/FeedbackList";
 import FeedbackStats from "./Components/FeedbackStats";
 import FeedbackForm from "./Components/FeedbackForm";
 import About from './Components/About';
 import AboutIconList from './Components/AboutIconList';
-import Card from './Components/shared/Card';
+// import Card from './Components/shared/Card';
 import Posts from './Components/Posts';
 import { FeedbackProvider } from './ContactProvider/FeedbackContext';
 
@@ -37,14 +37,14 @@ function App() {
           <Route path='/about' element={<About/>} ></Route>
           <Route path='/post/*' element={<Posts/>}/>
         </Routes>
-        <Card>
+        {/* <Card>
         <NavLink to='/' activeClassName='active'>
             Home
         </NavLink>
         <NavLink to='/about' activeClassName='active'>
             About
         </NavLink>
-      </Card>
+      </Card> */}
       </div>
 
       
