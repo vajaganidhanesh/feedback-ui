@@ -2,15 +2,16 @@ import { motion, AnimatePresence } from "framer-motion";
 import React, { useContext } from "react";
 import FeedbackItem from "./FeedbackItem";
 // import PropTypes from "prop-types";
+import Spinner from "./shared/Spinner";
 import Card from "./shared/Card";
 import FeedbackContext from "../ContactProvider/FeedbackContext";
 
 function FeedbackList({  handleDelete }) {
   
-  const {feedback} = useContext(FeedbackContext)
+  const {feedback,isloading} = useContext(FeedbackContext)
 
   console.log(feedback);
-  if (!feedback || feedback.length === 0) {
+  if (!isloading &&(!feedback || feedback.length === 0)) {
     return (
       <Card>
         <p>No Feedback Yet</p>
@@ -18,7 +19,34 @@ function FeedbackList({  handleDelete }) {
     );
   }
 
-  // return (
+  return isloading ? <Spinner/>:
+  (<div className="feedback-list">
+  <AnimatePresence>
+    {feedback.map((item)=>{
+      return(
+      <motion.div
+       key={item.id}
+              initial={{opacity:0}}
+              animate={{opacity:1}}
+              exit={{opacity:0}}
+              >
+           
+              <FeedbackItem
+                key={item.id}
+                item={item}
+                handleDelete={handleDelete}
+              />
+            
+            
+            </motion.div>  
+        )}) }
+  </AnimatePresence>
+</div>)
+  
+  
+}
+
+// return (
   //   <div className="feedback-list">
   //     <AnimatePresence>
   //       {feedback.map((item, value) => {
@@ -40,31 +68,6 @@ function FeedbackList({  handleDelete }) {
   //   </div>
   // );
 
-  return (
-    <div className="feedback-list">
-      <AnimatePresence>
-        {feedback.map((item)=>{
-          return(
-          <motion.div
-           key={item.id}
-                  initial={{opacity:0}}
-                  animate={{opacity:1}}
-                  exit={{opacity:0}}
-                  >
-               
-                  <FeedbackItem
-                    key={item.id}
-                    item={item}
-                    handleDelete={handleDelete}
-                  />
-                
-                
-                </motion.div>  
-            )}) }
-      </AnimatePresence>
-    </div>
-  )
-}
 
 // FeedbackItem.propTypes = {
 //   feedback: PropTypes.arrayOf(
