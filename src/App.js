@@ -10,6 +10,7 @@ import About from './Components/About';
 import AboutIconList from './Components/AboutIconList';
 import Card from './Components/shared/Card';
 import Posts from './Components/Posts';
+import { FeedbackProvider } from './ContactProvider/FeedbackContext';
 
 function App() {
   const [feedback, setFeedback] = useState(FeedbackData);
@@ -27,17 +28,18 @@ function App() {
   };
 
   return (
+    <FeedbackProvider>
     <Router>
       <Header />
       <div className="container">
         <Routes>
           <Route path='/' element={<>
             <FeedbackForm handleAdd={addFeedback}/>
-            <FeedbackStats feedback={feedback}/>
-            <FeedbackList feedback={feedback} handleDelete={deleteFeedback}/>
+            <FeedbackStats />
+            <FeedbackList handleDelete={deleteFeedback}/>
           </>}/>
           <Route path='/about' element={<About/>} ></Route>
-          <Route path='/post/:id/:name' element={<Posts/>}/>
+          <Route path='/post/*' element={<Posts/>}/>
         </Routes>
         <Card>
         <NavLink to='/' activeClassName='active'>
@@ -53,6 +55,7 @@ function App() {
 
       <AboutIconList />
     </Router>
+    </FeedbackProvider>
   );
 }
 

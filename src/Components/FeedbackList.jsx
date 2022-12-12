@@ -1,10 +1,14 @@
 import { motion, AnimatePresence } from "framer-motion";
-import React from "react";
+import React, { useContext } from "react";
 import FeedbackItem from "./FeedbackItem";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Card from "./shared/Card";
+import FeedbackContext from "../ContactProvider/FeedbackContext";
 
-function FeedbackList({ feedback, handleDelete }) {
+function FeedbackList({  handleDelete }) {
+  
+  const {feedback} = useContext(FeedbackContext)
+
   console.log(feedback);
   if (!feedback || feedback.length === 0) {
     return (
@@ -62,14 +66,14 @@ function FeedbackList({ feedback, handleDelete }) {
   )
 }
 
-FeedbackItem.propTypes = {
-  feedback: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      text: PropTypes.string.isRequired,
-      rating: PropTypes.number.isRequired,
-    })
-  ),
-};
+// FeedbackItem.propTypes = {
+//   feedback: PropTypes.arrayOf(
+//     PropTypes.shape({
+//       id: PropTypes.number.isRequired,
+//       text: PropTypes.string.isRequired,
+//       rating: PropTypes.number.isRequired,
+//     })
+//   ),
+// };
 
 export default FeedbackList;
