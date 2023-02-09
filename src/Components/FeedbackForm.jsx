@@ -48,7 +48,6 @@ function FeedbackForm() {
       updateFeedback(feedbackedit.item.id , newFeedback)
     }
     else{
-
       addFeedback(newFeedback);
     }
 
